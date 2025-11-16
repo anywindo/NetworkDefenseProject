@@ -1,0 +1,35 @@
+{
+  "timestamp": "2025-11-08T09:16:18.352654+0000",
+  "flow_id": 670212990404575,
+  "in_iface": "ens33",
+  "event_type": "alert",
+  "src_ip": "192.168.1.50",
+  "src_port": 37965,
+  "dest_ip": "192.168.1.100",
+  "dest_port": 47174,
+  "proto": "TCP",
+  "ip_v": 4,
+  "pkt_src": "wire/pcap",
+  "alert": {
+    "action": "allowed",
+    "gid": 1,
+    "signature_id": 1000882,
+    "rev": 1,
+    "signature": "DOS: >=5000 pkts in 10s from same source (inbound)",
+    "category": "Attempted Denial of Service",
+    "severity": 1
+  },
+  "direction": "to_server",
+  "flow": {
+    "pkts_toserver": 1,
+    "pkts_toclient": 0,
+    "bytes_toserver": 60,
+    "bytes_toclient": 0,
+    "start": "2025-11-08T09:16:18.352654+0000",
+    "src_ip": "192.168.1.50",
+    "dest_ip": "192.168.1.100",
+    "src_port": 37965,
+    "dest_port": 47174
+  }
+}
+...

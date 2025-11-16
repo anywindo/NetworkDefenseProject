@@ -1,0 +1,56 @@
+...
+{
+  "eventid": "cowrie.client.kex",
+  "hassh": "e788c657d1a22971d5026526ffd2e918",
+  "hasshAlgorithms": "diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hellman-group14-sha256,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha1,diffie-hellman-group-exchange-sha256;aes128-cbc,3des-cbc,blowfish-cbc,aes192-cbc,aes256-cbc,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,hmac-ripemd160;none",
+  "kexAlgs": [
+    "diffie-hellman-group1-sha1",
+    "diffie-hellman-group14-sha1",
+    "diffie-hellman-group14-sha256",
+    "diffie-hellman-group16-sha512",
+    "diffie-hellman-group-exchange-sha1",
+    "diffie-hellman-group-exchange-sha256"
+  ],
+  "keyAlgs": [
+    "ssh-ed25519"
+  ],
+  "encCS": [
+    "aes128-cbc",
+    "3des-cbc",
+    "blowfish-cbc",
+    "aes192-cbc",
+    "aes256-cbc",
+    "aes128-ctr",
+    "aes192-ctr",
+    "aes256-ctr"
+  ],
+  "macCS": [
+    "hmac-md5",
+    "hmac-sha1",
+    "hmac-ripemd160"
+  ],
+  "compCS": [
+    "none"
+  ],
+  "langCS": [
+    ""
+  ],
+  "message": "SSH client hassh fingerprint: e788c657d1a22971d5026526ffd2e918",
+  "sensor": "honeypot",
+  "uuid": "83dbccce-bb29-11f0-bbe0-005056357778",
+  "timestamp": "2025-11-08T09:35:42.467895Z",
+  "src_ip": "192.168.1.50",
+  "session": "c7163e47c508",
+  "protocol": "ssh"
+}
+{
+  "eventid": "cowrie.session.closed",
+  "duration": "0.4",
+  "message": "Connection lost after 0.4 seconds",
+  "sensor": "honeypot",
+  "uuid": "83dbccce-bb29-11f0-bbe0-005056357778",
+  "timestamp": "2025-11-08T09:35:42.672938Z",
+  "src_ip": "192.168.1.50",
+  "session": "c7163e47c508",
+  "protocol": "ssh"
+}

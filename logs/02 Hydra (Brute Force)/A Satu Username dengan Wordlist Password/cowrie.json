@@ -1,0 +1,14 @@
+{
+  "eventid": "cowrie.login.failed",
+  "username": "root",
+  "fingerprint": "05:ec:7e:fd:35:ea:54:56:a8:9f:95:eb:23:82:92:b4",
+  "key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKkM4w99zu285tmTSWK5cRkJf7w4gGEddRl2dKYuRbZd",
+  "type": "ssh-ed25519",
+  "message": "public key login attempt for [root] failed",
+  "sensor": "honeypot",
+  "uuid": "83dbccce-bb29-11f0-bbe0-005056357778",
+  "timestamp": "2025-11-08T06:21:31.780365Z",
+  "src_ip": "192.168.1.1",
+  "session": "2e8106e25d63",
+  "protocol": "ssh"
+}
