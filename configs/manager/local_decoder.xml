@@ -1,0 +1,40 @@
+<!-- Local Decoders -->
+
+<!-- Modify it at your will. -->
+<!-- Copyright (C) 2015, Wazuh Inc. -->
+
+<!--
+  - Allowed static fields:
+  - location   - where the log came from (only on FTS)
+  - srcuser    - extracts the source username
+  - dstuser    - extracts the destination (target) username
+  - user       - an alias to dstuser (only one of the two can be used)
+  - srcip      - source ip
+  - dstip      - dst ip
+  - srcport    - source port
+  - dstport    - destination port
+  - protocol   - protocol
+  - id         - event id
+  - url        - url of the event
+  - action     - event action (deny, drop, accept, etc)
+  - status     - event status (success, failure, etc)
+  - extra_data - Any extra data
+
+
+<decoder name="local_decoder_example">
+    <program_name>local_decoder_example</program_name>
+</decoder>
+
+
+<decoder name="snort-full">
+  <prematch>\[\*\*\]</prematch>
+</decoder>
+
+
+
+ <decoder name="dionaea">
+   <prematch_pcre2>dionaea\.connections</prematch_pcre2>
+   <pcre2>^\{"direction": "(\S+)", "protocol": "(\S+)", "ids_type": "\S+", "timestamp": "\d{4}-\d{2}-\d{2}\w\d{2}:\d{2}:\d{2}.\d+", "dionaea_action": "(\S+)", "type": "dionaea\.connections", "app": "dionaea", "src_ip": "(\S+)", "vendor_product": "Dionaea", "dest_port": (\d+), "signature": ".+", "src_port": (\d+?), "dest_ip": "(\S+)", "sensor": \S+, "transport": "\S+", "severity": "\S+"\}</pcre2>
+   <order>extra_data, protocol, action, srcip, dstport, srcport, dstip</order>
+ </decoder>
+-->

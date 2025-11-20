@@ -1,0 +1,132 @@
+
+<!-- Modify it at your will. -->
+<group name="cowrie,dionaea,suricata,local,">
+
+  <!-- ======================= -->
+  <!--       COWRIE RULES      -->
+  <!-- ======================= -->
+
+  <rule id="120000" level="3">
+    <decoded_as>json</decoded_as>
+    <field name="eventid">cowrie.login.failed</field>
+    <description>Cowrie: Failed login $(message)</description>
+    <group>cowrie,auth,failed,</group>
+  </rule>
+
+  <rule id="120001" level="6">
+    <decoded_as>json</decoded_as>
+    <field name="eventid">cowrie.login.success</field>
+    <description>Cowrie: Login success from $(src_ip) $(message)</description>
+    <group>cowrie,auth,success,</group>
+  </rule>
+
+  <rule id="120002" level="5">
+    <decoded_as>json</decoded_as>
+    <field name="eventid">cowrie.command.input</field>
+    <description>Cowrie: Command executed by $(src_ip): $(message)</description>
+    <group>cowrie,command,exec,</group>
+  </rule>
+
+  <rule id="120100" level="9" frequency="5" timeframe="60">
+    <if_matched_sid>120000</if_matched_sid>
+    <field name="src_ip" same_value="yes"/>
+    <description>Cowrie: Repeated failed logins from $(src_ip)</description>
+    <group>cowrie,bruteforce,auth,</group>
+  </rule>
+
+  <rule id="120200" level="12" frequency="15" timeframe="60">
+    <if_matched_sid>120000</if_matched_sid>
+    <field name="src_ip" same_value="yes"/>
+    <description>Cowrie: Bruteforce login attempt from $(src_ip)</description>
+    <group>cowrie,bruteforce,auth,</group>
+  </rule>
+
+  <rule id="120003" level="3">
+    <decoded_as>json</decoded_as>
+    <field name="eventid">cowrie.client.version</field>
+    <match>Nmap</match>
+    <description>Cowrie: Nmap SSH probe detected</description>
+    <group>cowrie,scan,nmap,</group>
+  </rule>
+
+  <rule id="120103" level="10" frequency="5" timeframe="10">
+    <if_matched_sid>120003</if_matched_sid>
+    <field name="src_ip" same_value="yes"/>
+    <description>Cowrie: Burst of Nmap probes from $(src_ip)</description>
+    <group>cowrie,scan,nmap,</group>
+  </rule>
+
+
+
+  <!-- ======================= -->
+  <!--      DIONAEA RULES      -->
+  <!-- ======================= -->
+
+  <rule id="130000" level="4">
+    <decoded_as>json</decoded_as>
+    <field name="connection_type">tcp</field>
+    <description>Dionaea: TCP connection from $(remote_host)</description>
+    <group>dionaea,connection,tcp,</group>
+  </rule>
+
+  <rule id="130010" level="7">
+    <decoded_as>json</decoded_as>
+    <field name="download_url">http</field>
+    <description>Dionaea: Malware download attempt from $(remote_host)</description>
+    <group>dionaea,malware,download,</group>
+  </rule>
+
+  <rule id="130020" level="10" frequency="3" timeframe="60">
+    <if_matched_sid>130010</if_matched_sid>
+    <field name="remote_host" same_value="yes"/>
+    <description>Dionaea: Repeated malware downloads from $(remote_host)</description>
+    <group>dionaea,malware,repeated,</group>
+  </rule>
+
+  <rule id="130030" level="8">
+    <decoded_as>json</decoded_as>
+    <field name="service">smb</field>
+    <description>Dionaea: SMB exploit or worm activity from $(remote_host)</description>
+    <group>dionaea,exploit,smb,</group>
+  </rule>
+
+
+
+  <!-- ======================= -->
+  <!--      SURICATA RULES     -->
+  <!-- ======================= -->
+
+  <rule id="900201" level="4">
+    <match>SCAN</match>
+    <description>Suricata: Scan detected from $(src_ip)</description>
+    <group>suricata,scan,</group>
+  </rule>
+
+  <rule id="900202" level="9">
+    <match>NMAP</match>
+    <description>Suricata: Aggressive Nmap scan from $(src_ip)</description>
+    <group>suricata,scan,nmap,</group>
+  </rule>
+
+  <rule id="900203" level="11" frequency="5" timeframe="20" ignore="5">
+    <if_matched_sid>900201</if_matched_sid>
+    <field name="src_ip" same_value="yes"/>
+    <description>Suricata: Repeated scan bursts from $(src_ip)</description>
+    <group>suricata,scan,repeated,</group>
+  </rule>
+
+  <rule id="900204" level="5">
+    <field name="alert.signature_id">1000882</field>
+    <description>Suricata: High packet rate from $(src_ip)</description>
+    <group>suricata,dos,</group>
+  </rule>
+
+  <rule id="900205" level="12" frequency="10" timeframe="30">
+    <if_matched_sid>900204</if_matched_sid>
+    <field name="src_ip" same_value="yes"/>
+    <description>Suricata: DDoS activity detected from $(src_ip)</description>
+    <group>suricata,dos,repeated,</group>
+  </rule>
+
+
+</group>
